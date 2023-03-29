@@ -1,0 +1,38 @@
+<h2>Candidates</h2>
+
+<div class="candidate-grid">
+    <div *ngFor="let c of candidates$ | async" class="candidate-card">
+        <img [src]="c.employee.picture" />
+        <div>
+            {{ c.employee.name }}
+        </div>
+        <div class="candidate-detail">
+            <div class="flex">
+                <span>Expertize</span>
+                <span>
+                    <span class="progress-bar" [ngStyle]="{'width': c.employee.expertize + '%'}">&nbsp;</span>
+                    {{ c.employee.expertize }} / 100
+                </span>
+            </div>
+        </div>
+        <div class="candidate-detail">
+            <div class="flex">
+                <span>Laziness</span>
+                <span>
+                    <span class="progress-bar" [ngStyle]="{'width': c.employee.laziness + '%'}">&nbsp;</span>
+                    {{ c.employee.laziness }} / 100
+                </span>
+            </div>
+        </div>
+        <div class="candidate-detail flex">
+            <span>Salary</span>
+            <span>{{ c.salaryExpectation }}</span>
+        </div>
+        <div>
+            Days without job: {{ c.daysWithoutJob }}
+        </div>
+        <div>
+            <button class="blue">Hire</button>
+        </div>
+    </div>
+</div>

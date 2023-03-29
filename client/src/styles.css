@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --clr-white: whitesmoke;
+    --clr-darkBlue: darkblue;
+    --clr-lightBlue: lightblue;
+    --clr-opaqueBlue: #00009933;
+}
+
+button {
+    border-radius: .2rem;
+    width: 4rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button.blue {
+    background-color: var(--clr-lightBlue);
+    border: .1rem ridge var(--clr-darkBlue);
+}
+
+button.blue:hover {
+    background-color: var(--clr-darkBlue);
+    color: var(--clr-white);
+}

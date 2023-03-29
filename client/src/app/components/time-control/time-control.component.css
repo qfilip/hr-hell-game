@@ -1,0 +1,18 @@
+div > * {
+    margin-right: .2rem;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 100%;
+    font-size: 1.2rem;
+}
+
+label > span {
+    /* width: 3rem; */
+    min-width: 7rem;
+}
+
+input[type="date"] {
+    pointer-events: none;
+}
