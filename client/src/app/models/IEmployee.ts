@@ -2,6 +2,7 @@ import { SafeResourceUrl } from "@angular/platform-browser";
 
 export interface IEmployee {
     id: string;
+    projectId: string;
     name: string;
     salary: number;
     laziness: number;

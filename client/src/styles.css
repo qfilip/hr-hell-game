@@ -1,17 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --clr-white: whitesmoke;
+    --clr-black: #222;
+    --clr-grey: grey;
+    --clr-white: whitesmoke;
     --clr-darkBlue: darkblue;
     --clr-lightBlue: lightblue;
     --clr-opaqueBlue: #00009933;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
 button {
+    background-color: var(--clr-white);
+    color: var(--clr-black);
+
     border-radius: .2rem;
     width: 4rem;
     font-size: 1rem;
     cursor: pointer;
     transition: .3s;
+}
+
+button:hover {
+    background-color: var(--clr-black);
+    color: var(--clr-white);
 }
 
 button.blue {

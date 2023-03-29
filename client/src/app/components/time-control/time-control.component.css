@@ -1,11 +1,33 @@
-div > * {
+header {
+    padding: .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header > * {
     margin-right: .2rem;
 }
 
-button {
-    cursor: pointer;
+.blue {
+    background-color: var(--clr-darkBlue);
+    color: var(--clr-white);
+}
+
+.grey {
+    background-color: var(--clr-grey);
+    color: var(--clr-black);
+}
+
+.time-btn {
     border-radius: 100%;
-    font-size: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+    transition: .3s;
+}
+
+.time-btn:hover {
+    background-color: ;
 }
 
 label > span {

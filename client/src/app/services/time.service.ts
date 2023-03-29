@@ -4,26 +4,33 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class SimulationService {
+export class TimeService {
     constructor() { }
     
-    private simulationRunning = false;
+    private timeRunning = false;
     private timeout: any;
     private dayLength$ = new BehaviorSubject(1000);
     private date$ = new BehaviorSubject(new Date(2000, 0, 1));
     private onDayPassedHandlers: (() => void)[] = [];
+    private onMonthPassedHandlers: (() => void)[] = [];
 
     startTimeFlow() {
-        if(this.simulationRunning) {
+        if(this.timeRunning) {
             return;
         }
-        this.simulationRunning = true;
+        this.timeRunning = true;
 
         const computeDay = () => {
             this.timeout = setTimeout(() => {
                 clearTimeout(this.timeout);
                 this.addDay();
+                
                 this.onDayPassedHandlers.forEach(fn => fn());
+                
+                if(this.date$.getValue().getDate() === 1) {
+                    this.onMonthPassedHandlers.forEach(fn => fn());
+                }
+                
                 computeDay();
             }, this.dayLength$.getValue());
         }
@@ -32,7 +39,7 @@ export class SimulationService {
     }
 
     freezeTimeFlow() {
-        this.simulationRunning = false;
+        this.timeRunning = false;
         clearTimeout(this.timeout);
     }
 
@@ -47,11 +54,10 @@ export class SimulationService {
     private addDay() {
         const newDate = new Date(this.date$.getValue());
         newDate.setDate(this.date$.getValue().getDate() + 1);
-        console.log(this.date$.getValue());
         this.date$.next(newDate);
     }
 
-    addOnDayPassedHandler(handler: () => void) {
+    onDayPassed(handler: () => void) {
         this.onDayPassedHandlers.push(handler);
     }
 }

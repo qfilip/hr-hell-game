@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { SimulationService } from 'src/app/services/simulation.service';
+import { ICompany } from 'src/app/models/ICompany';
+import { CompanyService } from 'src/app/services/company.service';
+import { TimeService } from 'src/app/services/time.service';
 
 @Component({
   selector: 'time-control',
@@ -9,30 +11,39 @@ import { SimulationService } from 'src/app/services/simulation.service';
 })
 export class TimeControlComponent implements OnInit {
 
-    constructor(private simulationService: SimulationService) {}
+    constructor(
+        private timeService: TimeService,
+        private companyService: CompanyService) {}
     
     ngOnInit(): void {
-        this.currentDate$ = this.simulationService.date
+        this.company$ = this.companyService.company
             .pipe(map(x => x));
 
-        this.dayLength$ = this.simulationService.dayLength
+        this.currentDate$ = this.timeService.date
+            .pipe(map(x => x));
+
+        this.dayLength$ = this.timeService.dayLength
             .pipe(map(x => x));
     }
     
+    company$: Observable<ICompany>;
     currentDate$: Observable<Date>;
     dayLength$: Observable<number>;
+    timeRunning: boolean = false;
 
     toggleTimeFlow(run: boolean) {
         if(run) {
-            this.simulationService.startTimeFlow();
+            this.timeService.startTimeFlow();
         }
         else {
-            this.simulationService.freezeTimeFlow();
+            this.timeService.freezeTimeFlow();
         }
+
+        this.timeRunning = run;
     }
 
     changeDayDuration(e: string) {
-        this.simulationService.setDayLength(parseInt(e));
+        this.timeService.setDayLength(parseInt(e));
     }
 
 }

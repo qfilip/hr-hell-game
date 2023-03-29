@@ -6,18 +6,3 @@ export function doDailyWork(e: IEmployee) {
     done = done < 0 ? 0 : done;
     return Math.round(done * 100) / 100;
 }
-
-var timeout: any;
-var time: number;
-function changed(val: number) {
-    time = val;
-    const inner = () => {
-        timeout = setTimeout(() => {
-            clearTimeout(timeout);
-            console.log('printing');
-            inner();
-        },time);
-    }
-
-    inner();
-}

@@ -1,20 +1,29 @@
-<div>
+<header [ngClass]="timeRunning ? 'blue' : 'grey'">
+    <h1>Company Manager</h1>
     <span>
-        <button (click)="toggleTimeFlow(true)">
-            &#9654;
-        </button>
-        <button (click)="toggleTimeFlow(false)">
-            &#9724;
-        </button>
+        <a [routerLink]="['']">home</a>
     </span>
-
-    <label>
+    <span>
+        budget: {{ (company$ | async).budget }}$
+    </span>
+    <span>
         <span>
-            Day in seconds {{ dayLength$ | async }}
+            <button class="time-btn" (click)="toggleTimeFlow(true)">
+                &#9654;
+            </button>
+            <button class="time-btn" (click)="toggleTimeFlow(false)">
+                &#9724;
+            </button>
         </span>
-
-        <input #dayDuration type="range" min="200" max="2000" value="dayLength$ | async"
-            (change)="changeDayDuration(dayDuration.value)" />
-    </label>
-    <input type="date" [valueAsDate]="currentDate$ | async" />
-</div>
+    
+        <label>
+            <span>
+                Day in seconds {{ dayLength$ | async }}
+            </span>
+    
+            <input #dayDuration type="range" min="200" max="2000" value="dayLength$ | async"
+                (change)="changeDayDuration(dayDuration.value)" />
+        </label>
+        <input type="date" [valueAsDate]="currentDate$ | async" />
+    </span>
+</header>

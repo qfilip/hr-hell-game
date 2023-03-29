@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HireComponent } from './components/hire/hire.component';
 import { TimeControlComponent } from './components/time-control/time-control.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HireComponent,
-    TimeControlComponent
+    TimeControlComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

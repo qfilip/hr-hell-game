@@ -22,7 +22,6 @@ yarn-error.log
 
 # Visual Studio Code
 **/.vscode/
-**/node_modules/
 **/.angular/cache
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -42,3 +41,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/*.bak

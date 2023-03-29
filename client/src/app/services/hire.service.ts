@@ -4,7 +4,7 @@ import { ICandidate } from '../models/ICandidate';
 import * as utils from '../functions/utils';
 import * as hireUtils from '../functions/hire-service.utils';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SimulationService } from './simulation.service';
+import { TimeService } from './time.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,9 +13,9 @@ export class HireService {
 
     constructor(
         private sanitizer: DomSanitizer,
-        private simulationService: SimulationService)
+        private timeService: TimeService)
         {
-            this.simulationService.addOnDayPassedHandler(() => {
+            this.timeService.onDayPassed(() => {
                 this.onDayPassed();
             });
         }
