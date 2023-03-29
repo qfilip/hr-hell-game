@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ICandidate } from '../models/ICandidate';
 import * as utils from '../functions/utils';
-import * as hireUtils from '../functions/hire-service.utils';
+import * as hireUtils from '../functions/candidate-service.utils';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TimeService } from './time.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HireService {
+export class CandidateService {
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -20,16 +20,21 @@ export class HireService {
             });
         }
 
-    private rooster$ = new BehaviorSubject<ICandidate[]>(hireUtils.createCandidates(10, this.sanitizer));
+    private candidates$ = new BehaviorSubject<ICandidate[]>(hireUtils.createCandidates(10, this.sanitizer));
 
-    rooster = this.rooster$.asObservable();
+    candidates = this.candidates$.asObservable();
+    
+    removeCandidate(c: ICandidate) {
+        const cs = this.candidates$.getValue().filter(x => x.employee.id !== c.employee.id);
+        this.candidates$.next(cs);
+    }
 
     private onDayPassed() {
-        const candidates = this.rooster$.getValue();
+        const candidates = this.candidates$.getValue();
         
         candidates.forEach(x => x.daysWithoutJob += 1);
         
-        let newRooster = candidates.reduce((acc, x) => {
+        let newCandidates = candidates.reduce((acc, x) => {
             let candidateFoundJobChance = Math.round(100 / x.daysWithoutJob);
             let candidateFoundJob = utils.computeChance(candidateFoundJobChance);
             candidateFoundJob ? () => {} : acc.push(x);
@@ -38,8 +43,8 @@ export class HireService {
         }, []);
 
         hireUtils.createCandidates(utils.makeRandomNumber(0, 2), this.sanitizer)
-            .forEach(x => newRooster.push(x));
+            .forEach(x => newCandidates.push(x));
 
-        this.rooster$.next(newRooster);
+        this.candidates$.next(newCandidates);
     }
 }

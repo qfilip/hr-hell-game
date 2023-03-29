@@ -1,0 +1,25 @@
+.container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    text-align: center;
+}
+
+section > div {
+    margin: 1rem 0rem;
+    border: .2rem ridge var(--clr-darkBlue);
+    padding: 1rem;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    transition: .3s;
+}
+
+button {
+    width: fit-content;
+}

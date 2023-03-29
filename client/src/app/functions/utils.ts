@@ -17,6 +17,7 @@ export function getAvatar(name: string, sanitizer: DomSanitizer) {
 export function createRandomEmployee() {
     const e: IEmployee = {
         id: makeId(),
+        projectId: null,
         name: faker.name.fullName(),
         salary: 0,
         laziness: makeRandomNumber(1, 100),
@@ -58,4 +59,8 @@ export function makeId() {
 
 export function makeRandomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
+}
+
+export function mockCompany() {
+    
 }

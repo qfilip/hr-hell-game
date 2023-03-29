@@ -1,0 +1,26 @@
+<h2>Projects</h2>
+<div class="container">
+    <section>
+        <h3>Active projects</h3>
+        <div *ngFor="let p of projects$ | async">
+            <div>
+                {{ p.name }}
+            </div>
+            <div>
+                <button (click)="manageEmployees(p)">Accept proposal</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Proposal projects</h3>
+        <div *ngFor="let p of proposals$ | async">
+            <div>
+                {{ p.name }}
+            </div>
+            <div>
+                <button (click)="acceptProposal(p)">Accept proposal</button>
+            </div>
+        </div>
+    </section>
+</div>

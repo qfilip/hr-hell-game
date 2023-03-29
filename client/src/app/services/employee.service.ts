@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { doDailyWork } from '../functions/work';
+import * as empUtils from '../functions/employee-service.utils';
 import { IEmployee } from '../models/IEmployee';
-import { IWorkData } from '../models/IWorkData';
-import { CompanyService } from './company.service';
+
 import { TimeService } from './time.service';
 
 @Injectable({
@@ -28,31 +27,31 @@ export class EmployeeService {
     salaryPayout = this.salaryPayout$.asObservable();
     dailyWork = this.dailyWork$.asObservable();
 
+    addEmployee(e: IEmployee) {
+        const es = [...this.employees$.getValue(), e];
+        this.employees$.next(es);
+    }
+
+    editEmployee(e: IEmployee) {
+        const es = this.employees$.getValue().reduce((acc, x) => {
+            x.id === e.id ? acc.push(e) : acc.push(x);
+            return acc;
+        }, []);
+        this.employees$.next(es);
+    }
+
+    removeEmployee(e: IEmployee) {
+        const es = this.employees$.getValue().filter(x => x.id !== e.id);
+        this.employees$.next(es);
+    }
+
     private computePayouts() {
-        const payout = this.employees$.getValue()
-            .reduce((acc, x) => {
-                acc += x.salary;
-                return acc;
-            }, 0);
-        
+        const payout = empUtils.computePayouts(this.employees$.getValue());
         this.salaryPayout$.next(payout);
     }
 
     private computeDailyWork() {
-        const initialValue: Map<string, number> = new Map();
-        const doDailyWork = (e: IEmployee) => {
-            const w = 1;
-            let done = w * (e.expertize - e.laziness + e.satisfaction);
-            done = done < 0 ? 0 : done;
-            return Math.round(done * 100) / 100;
-        }
-
-        const dailyWork = this.employees$.getValue()
-            .reduce((acc, x) => {
-                acc[x.projectId] += doDailyWork(x);
-                return acc;
-            }, initialValue);
-
+        const dailyWork = empUtils.computeDailyWork(this.employees$.getValue());
         this.dailyWork$.next(dailyWork);
     }
 }
