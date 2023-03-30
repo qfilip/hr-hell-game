@@ -1,50 +1,24 @@
-.candidate-grid {
-    display: grid;
-    justify-content: space-between;
-    grid-template-columns: repeat(auto-fill, 14rem);
-    gap: .5rem;
-    grid-row-gap: 1rem;
-    grid-auto-rows: 1fr;
-    width: 90%;
-    margin: auto;
+h2 {
+    margin: 1rem;
 }
 
-.candidate-card {
-    border: .2rem ridge var(--clr-darkBlue);
-    padding: 1rem;
-    background-color: lightblue;
+nav {
     display: flex;
+    justify-content: center;
     align-items: center;
-    flex-flow: column;
+    margin-bottom: 1rem;
+}
+
+nav > a {
+    padding: .2rem;
+    border-radius: .2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-bottom: 1rem 0rem;
     transition: .3s;
 }
 
-.candidate-card:hover {
-    box-shadow: .2rem .2rem .3rem var(--clr-darkBlue);
-    /* transform: scale(1.05); */
-}
-
-.candidate-card > img {
-    width: 50%;
-    background-color: white;
-}
-
-.candidate-detail {
-    width: 80%;
-}
-
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.flex > span {
-    position: relative;
-    width: 50%;
-}
-
-.progress-bar {
-    position: absolute;
-    background-color: var(--clr-opaqueBlue);
+nav > a:hover {
+    background-color: var(--clr-darkBlue);
+    color: var(--clr-white);
 }

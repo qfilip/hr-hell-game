@@ -1,0 +1,60 @@
+<div class="candidate-grid">
+    <div *ngFor="let c of candidates$ | async" class="candidate-card">
+        <img [src]="c.employee.picture" />
+        <div>
+            {{ c.employee.name }}
+        </div>
+        <div class="candidate-detail">
+            <div class="flex">
+                <span>Expertize</span>
+                <span>
+                    <span class="progress-bar" [ngStyle]="{'width': c.employee.expertize + '%'}">&nbsp;</span>
+                    {{ c.employee.expertize }} / 100
+                </span>
+            </div>
+        </div>
+        <div class="candidate-detail">
+            <div class="flex">
+                <span>Laziness</span>
+                <span>
+                    <span class="progress-bar" [ngStyle]="{'width': c.employee.laziness + '%'}">&nbsp;</span>
+                    {{ c.employee.laziness }} / 100
+                </span>
+            </div>
+        </div>
+        <div class="candidate-detail flex">
+            <span>Salary Expectation</span>
+            <span>{{ c.salaryExpectation }}</span>
+        </div>
+        <div>
+            Days without job: {{ c.daysWithoutJob }}
+        </div>
+        <div>
+            <button (click)="openOfferDialog(c)" class="blue">Send offer</button>
+        </div>
+    </div>
+</div>
+
+<app-dialog #appDialog>
+    <h4 header>Send offer</h4>
+    <div body class="offer-dialog-body">
+        <div>
+            <span>To:</span> 
+            <span>{{ selectedCandidate.employee.name  }}</span>
+        </div>
+        <div>
+            <span>Minimum salary:</span>
+            <span>{{ selectedCandidate.salaryExpectation }}</span>
+        </div>
+        <div>
+            <label>
+                Offer:
+            </label>
+            <input #salaryOffer type="number" [value]="selectedCandidate.salaryExpectation" class="offer-input" />
+        </div>
+    </div>
+    <div footer class="offer-dialog-footer">
+        <button (click)="sendOffer(salaryOffer.value, selectedCandidate)" class="blue">Send</button>
+        <button (click)="closeOfferDialog()" class="blue">Close</button>
+    </div>
+</app-dialog>

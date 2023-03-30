@@ -1,0 +1,17 @@
+<div class="offer-grid">
+    <div *ngFor="let o of offers$ | async" class="offer-card">
+        <img [src]="o.candidate.employee.picture" />
+        <div>
+            {{ o.candidate.employee.name }}
+        </div>
+        <div class="offer-detail">
+            <div>Offered:</div>
+            <div>{{ o.offeredSalary }}</div>
+        </div>
+        <div class="offer-detail">
+            <div>Expected:</div>
+            <div>{{ o.candidate.salaryExpectation }}</div>
+        </div>
+    </div>
+</div>
+

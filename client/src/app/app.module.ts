@@ -7,6 +7,9 @@ import { HireComponent } from './components/employee/hire/hire.component';
 import { TimeControlComponent } from './components/time-control/time-control.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectsOverviewComponent } from './components/project/projects-overview/projects-overview.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { CandidatesComponent } from './components/employee/candidates/candidates.component';
+import { OffersComponent } from './components/employee/offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { ProjectsOverviewComponent } from './components/project/projects-overvie
     HireComponent,
     TimeControlComponent,
     HomeComponent,
-    ProjectsOverviewComponent
+    ProjectsOverviewComponent,
+    DialogComponent,
+    CandidatesComponent,
+    OffersComponent
   ],
   imports: [
     BrowserModule,

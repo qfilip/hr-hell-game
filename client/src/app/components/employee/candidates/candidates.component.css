@@ -1,0 +1,80 @@
+.candidate-grid {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, 14rem);
+    gap: .5rem;
+    grid-row-gap: 1rem;
+    grid-auto-rows: 1fr;
+    width: 90%;
+    margin: auto;
+}
+
+.candidate-card {
+    border: .2rem ridge var(--clr-darkBlue);
+    padding: 1rem;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    transition: .3s;
+}
+
+.candidate-card:hover {
+    box-shadow: .2rem .2rem .3rem var(--clr-darkBlue);
+    /* transform: scale(1.05); */
+}
+
+.candidate-card > img {
+    width: 50%;
+    background-color: white;
+}
+
+.candidate-detail {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex > span {
+    position: relative;
+    width: 50%;
+}
+
+.progress-bar {
+    position: absolute;
+    background-color: var(--clr-opaqueBlue);
+}
+
+button {
+    width: fit-content;
+}
+
+.offer-dialog-body {
+    width: 20rem;
+    margin-top: 1rem;
+}
+
+.offer-dialog-body > * {
+    margin-top: .5rem;
+}
+
+.offer-dialog-body > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.offer-input {
+    width: 4rem;
+}
+
+.offer-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}

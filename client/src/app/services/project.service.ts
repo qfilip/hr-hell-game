@@ -23,7 +23,7 @@ export class ProjectService {
         })
     }
 
-    private projects$ = new BehaviorSubject<IProject[]>([]);
+    private projects$ = new BehaviorSubject<IProject[]>([projUtils.generateOnboardingProject()]);
     private proposals$ = new BehaviorSubject<IProject[]>(projUtils.generateProposals(10));
     
     projects = this.projects$.asObservable();

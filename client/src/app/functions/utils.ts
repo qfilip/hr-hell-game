@@ -29,28 +29,8 @@ export function createRandomEmployee() {
     return e;
 }
 
-export function computeChance(successChancePercentage: number) {
-    let chances: { willHappen: boolean, orderNumber: number }[] = [];
-    
-    for(let i = 0; i < successChancePercentage; i++) {
-        chances.push({
-            willHappen: true,
-            orderNumber: makeRandomNumber(0, 99)
-        });
-    }
-
-    let failureChancePercentage = 100 - successChancePercentage;
-
-    for(let i = 0; i < failureChancePercentage; i++) {
-        chances.push({
-            willHappen: false,
-            orderNumber: makeRandomNumber(0, 99)
-        });
-    }
-
-    chances.sort((a, b) => a.orderNumber - b.orderNumber);
-    
-    return chances[makeRandomNumber(0, 99)].willHappen;
+export function maybeGetTrue(probability: number) {
+    return makeRandomNumber(1, 100) <= probability;
 }
 
 export function makeId() {

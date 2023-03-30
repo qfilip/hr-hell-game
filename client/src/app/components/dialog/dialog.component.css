@@ -1,0 +1,4 @@
+dialog {
+    border: .2rem groove var(--clr-darkBlue);
+    padding: 1rem;
+}

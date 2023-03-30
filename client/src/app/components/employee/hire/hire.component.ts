@@ -1,28 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
 import { ICandidate } from 'src/app/models/ICandidate';
 import { CandidateService } from 'src/app/services/candidate.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
     selector: 'hire',
     templateUrl: './hire.component.html',
     styleUrls: ['./hire.component.css']
 })
-export class HireComponent implements OnInit {
+export class HireComponent {
+    constructor() { }
 
-    constructor(
-        private candidateService: CandidateService,
-        private employeeService: EmployeeService) { }
+    activeComponent: 'candidates' | 'offers' = 'candidates';
 
-    ngOnInit(): void {
-        this.candidates$ = this.candidateService.candidates;
-    }
-    
-    candidates$: Observable<ICandidate[]>;
-
-    makeOffer(c: ICandidate) {
-        this.candidateService.removeCandidate(c);
-        this.employeeService.addEmployee(c.employee);
+    setActiveComponent(x: 'candidates' | 'offers') {
+        this.activeComponent = x;
     }
 }

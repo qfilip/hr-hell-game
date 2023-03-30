@@ -18,6 +18,19 @@ export function updateProjectsEmployees(es: IEmployee[], ps: IProject[]) {
     });
 }
 
+export function generateOnboardingProject() {
+    const p: IProject = {
+        id: faker.git.shortSha(),
+        name: 'Onboarding',
+        assignedEmployees: [],
+        completedWork: 0,
+        totalWork: 0,
+        successPayout: 0
+    }
+
+    return p;
+}
+
 export function generateProposals(count: number) {
     let ps = [];
     for(let i = 0; i < count; i++) {
