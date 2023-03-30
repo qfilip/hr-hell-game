@@ -1,6 +1,5 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import { ICandidate } from '../models/ICandidate';
-import { IOffer } from '../models/IOffer';
 import * as utils from './utils';
 
 export function createCandidates(count: number, sanitizer: DomSanitizer) {

@@ -39,7 +39,7 @@ export class CandidateService {
     addOffers = (o: IOffer | IOffer[]) => rxUtils.add(o, this.offers$);
     removeOffers = (offers: IOffer[]) => {
         const employeeIds = offers.map(x => x.candidate.employee.id);
-        const filterFn = ((x: IOffer) => employeeIds.includes(x.candidate.employee.id));
+        const filterFn = ((x: IOffer) => !employeeIds.includes(x.candidate.employee.id));
         rxUtils.removeMany(this.offers$, filterFn);
     }
 
@@ -63,11 +63,12 @@ export class CandidateService {
     }
 
     private refreshOffers() {
-        const expiredOffers = this.offers$.getValue()
+        const refreshedOffers = this.offers$.getValue()
             .map(x => ({...x, daysUntilResponse: x.daysUntilResponse - 1, daysInQueue: x.daysInQueue + 1}))
-            .filter(x => x.daysUntilResponse === 0);
+            
+        this.offers$.next(refreshedOffers);
 
-        console.log(expiredOffers.map(x => x.daysUntilResponse));
+        const expiredOffers = refreshedOffers.filter(x => x.daysUntilResponse === 0);
 
         let refused: IOffer[] = [];
         let accepted: IOffer[] = [];
@@ -81,8 +82,8 @@ export class CandidateService {
             }
         });
         
-        this.addCandidate(refused.map(x => x.candidate));
-        this.removeOffers(refused);
+        this.addCandidate(refused.map(x => ({...x.candidate, daysWithoutJob: x.candidate.daysWithoutJob + x.daysInQueue})));
+        this.removeOffers(expiredOffers);
 
         const onboardingProjectId = projUtils.generateOnboardingProject().id;
 

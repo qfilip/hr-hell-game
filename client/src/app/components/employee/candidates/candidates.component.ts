@@ -46,6 +46,7 @@ export class CandidatesComponent implements OnInit {
 
         this.candidateService.removeCandidate(candidate);
         this.candidateService.addOffers(offer);
+        this.appDialog.close();
     }
 
     closeOfferDialog() {

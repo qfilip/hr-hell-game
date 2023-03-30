@@ -11,7 +11,7 @@ export function updateProjectsWork(workMap: Map<string, number>, ps: IProject[])
 
 export function updateProjectsEmployees(es: IEmployee[], ps: IProject[]) {
     const employeeMap = new Map<string, IEmployee[]>();
-    es.forEach(x => employeeMap[x.projectId].push(x));
+    es.forEach(x => employeeMap[x.projectId] ? employeeMap[x.projectId].push(x) : employeeMap[x.projectId] = [x]);
 
     return ps.map(p => {
         return {...p, assignedEmployees: employeeMap[p.id] }
