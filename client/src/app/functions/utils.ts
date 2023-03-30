@@ -40,7 +40,3 @@ export function makeId() {
 export function makeRandomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
-
-export function mockCompany() {
-    
-}

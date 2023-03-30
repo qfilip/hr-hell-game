@@ -4,6 +4,7 @@ import { IEmployee } from '../models/IEmployee';
 import { IProject } from '../models/IProject';
 import { EmployeeService } from './employee.service';
 import * as projUtils from '../functions/project-service.utils';
+import * as rxUtils from '../functions/rx.utils';
 
 @Injectable({
     providedIn: 'root'
@@ -27,23 +28,13 @@ export class ProjectService {
     private proposals$ = new BehaviorSubject<IProject[]>(projUtils.generateProposals(10));
     
     projects = this.projects$.asObservable();
-    addProject = (p: IProject) => this.addItem(p, this.projects$);
-    removeProject = (p: IProject) => this.removeItem(p, this.projects$);
+    addProjects = (p: IProject | IProject[]) => rxUtils.add(p, this.projects$);
+    removeProject = (p: IProject) => rxUtils.remove(p, this.projects$, (i, v) => i.id !== v.id);
     
     proposals = this.proposals$.asObservable();
-    addProposal = (p: IProject) => this.addItem(p, this.proposals$);
-    removeProposal = (p: IProject) => this.removeItem(p, this.proposals$);
+    addProposal = (p: IProject | IProject[]) => rxUtils.add(p, this.proposals$);
+    removeProposal = (p: IProject) => rxUtils.remove(p, this.proposals$, (i, v) => i.id !== v.id);
 
-    
-    private addItem(x: IProject, bs$: BehaviorSubject<IProject[]>) {
-        const xs = [...bs$.getValue(), x];
-        this.projects$.next(xs);
-    }
-
-    private removeItem(x: IProject, bs$: BehaviorSubject<IProject[]>) {
-        const xs = bs$.getValue().filter(v => v.id !== x.id);
-        bs$.next(xs);
-    }
 
     private updateProjectsWork(x: Map<string, number>) {
         const projects = projUtils.updateProjectsWork(x, this.projects$.getValue());

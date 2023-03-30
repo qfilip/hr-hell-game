@@ -22,7 +22,7 @@ export class ProjectsOverviewComponent implements OnInit {
 
     acceptProposal(p: IProject) {
         this.projectService.removeProposal(p);
-        this.projectService.addProject(p);
+        this.projectService.addProjects(p);
     }
 
     manageEmployees(p) {

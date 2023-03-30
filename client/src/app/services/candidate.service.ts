@@ -4,11 +4,12 @@ import { ICandidate } from '../models/ICandidate';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TimeService } from './time.service';
 import { IOffer } from '../models/IOffer';
-import * as utils from '../functions/utils';
-import * as hireUtils from '../functions/candidate-service.utils';
-import * as projUtils from '../functions/project-service.utils';
 import { EmployeeService } from './employee.service';
 import { IEmployee } from '../models/IEmployee';
+import * as utils from '../functions/utils';
+import * as rxUtils from '../functions/rx.utils';
+import * as hireUtils from '../functions/candidate-service.utils';
+import * as projUtils from '../functions/project-service.utils';
 
 @Injectable({
     providedIn: 'root'
@@ -28,29 +29,18 @@ export class CandidateService {
 
     private candidates$ = new BehaviorSubject<ICandidate[]>(hireUtils.createCandidates(10, this.sanitizer));
     candidates = this.candidates$.asObservable();
-    addCandidate(c: ICandidate | ICandidate[]) {
-        const cs = [...this.candidates$.getValue().concat(c)];
-        this.candidates$.next(cs);
-    }
-
-    removeCandidate(c: ICandidate) {
-        const cs = this.candidates$.getValue().filter(x => x.employee.id !== c.employee.id);
-        this.candidates$.next(cs);
-    }
+    
+    addCandidate = (c: ICandidate | ICandidate[]) => rxUtils.add(c, this.candidates$);
+    removeCandidate = (c: ICandidate) => rxUtils.remove(c, this.candidates$, (i, v) => i.employee.id !== v.employee.id);
 
     private offers$ = new BehaviorSubject<IOffer[]>([]);
     offers = this.offers$.asObservable();
     
-    addOffers(o: IOffer | IOffer[]) {
-        const os = [...this.offers$.getValue().concat(o)];
-        this.offers$.next(os);
-    }
-
-    removeOffers(offers: IOffer[]) {
+    addOffers = (o: IOffer | IOffer[]) => rxUtils.add(o, this.offers$);
+    removeOffers = (offers: IOffer[]) => {
         const employeeIds = offers.map(x => x.candidate.employee.id);
-        const os = this.offers$.getValue().filter(x => employeeIds.includes(x.candidate.employee.id));
-        
-        this.offers$.next(os);
+        const filterFn = ((x: IOffer) => employeeIds.includes(x.candidate.employee.id));
+        rxUtils.removeMany(this.offers$, filterFn);
     }
 
     private refreshCandidates() {
@@ -106,6 +96,6 @@ export class CandidateService {
             return e;
         });
 
-        this.employeeService.addEmployee(newEmployees);
+        this.employeeService.addEmployees(newEmployees);
     }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import * as empUtils from '../functions/employee-service.utils';
 import { IEmployee } from '../models/IEmployee';
+import * as rxUtils from '../functions/rx.utils';
+import * as empUtils from '../functions/employee-service.utils';
 
 import { TimeService } from './time.service';
 
@@ -20,35 +21,29 @@ export class EmployeeService {
     }
 
     private employees$ = new BehaviorSubject<IEmployee[]>([]);
-    private salaryPayout$ = new Subject<number>();
-    private dailyWork$ = new Subject<Map<string, number>>();
-    
     employees = this.employees$.asObservable();
-    salaryPayout = this.salaryPayout$.asObservable();
-    dailyWork = this.dailyWork$.asObservable();
-
-    addEmployee(e: IEmployee | IEmployee[]) {
-        const es = [...this.employees$.getValue().concat(e)];
-        this.employees$.next(es);
-    }
-
-    editEmployee(e: IEmployee) {
-        const es = this.employees$.getValue().reduce((acc, x) => {
+    addEmployees = (e: IEmployee | IEmployee[]) => rxUtils.add(e, this.employees$);
+    editEmployee = (e: IEmployee) => {
+        const reducerFn = ((acc: IEmployee[], x: IEmployee) => {
             x.id === e.id ? acc.push(e) : acc.push(x);
             return acc;
-        }, []);
-        this.employees$.next(es);
+        });
+        rxUtils.edit(this.employees$, reducerFn);
     }
 
-    removeEmployee(e: IEmployee) {
-        const es = this.employees$.getValue().filter(x => x.id !== e.id);
-        this.employees$.next(es);
-    }
-
+    removeEmployee = (e: IEmployee) => rxUtils.remove(e, this.employees$, (i, v) => i.id !== v.id);
+    
+    private salaryPayout$ = new Subject<number>();
+    salaryPayout = this.salaryPayout$.asObservable();
     private computePayouts() {
         const payout = empUtils.computePayouts(this.employees$.getValue());
         this.salaryPayout$.next(payout);
     }
+    
+    private dailyWork$ = new Subject<Map<string, number>>();
+    dailyWork = this.dailyWork$.asObservable();
+
+
 
     private computeDailyWork() {
         const dailyWork = empUtils.computeDailyWork(this.employees$.getValue());
