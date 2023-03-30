@@ -26,40 +26,14 @@ export function createCandidate(sanitizer: DomSanitizer) {
 }
 
 export function computeOfferAcceptanceChance(offeredSalary: number, candidate: ICandidate) {
-    const chance = 1;
-    const timeModifier = candidate.daysWithoutJob * 3;
-    chance * (candidate.employee.laziness - candidate.employee.expertize + timeModifier);
-}
+    const e = candidate.employee;
 
-type Args = {
-    offer: number
-    expect: number
-    days: number
-    lazy: number
-    exp: number
-}
+    const timeModifier = candidate.daysWithoutJob * 1.2;
+    const salaryModifier = (offeredSalary / (candidate.salaryExpectation + e.expertize * 7)) * 50
+    const lazyModifier = e.laziness / 5;
+    const expModifier = (1 / e.expertize) * 1000;
+    
+    const probability = salaryModifier + lazyModifier + expModifier + timeModifier;
 
-export function compute(x: Args) {
-    const timeModifier = x.days * 2;
-    
-    const salaryModifier = (x.offer / (x.expect + x.exp * 7)) * 50
-    console.log(salaryModifier);
-    
-    const lazyModifier = x.lazy/5;
-    console.log(lazyModifier);
-    
-    const expModifier = x.exp/2;
-    console.log(expModifier);
-    
-    const r = salaryModifier + lazyModifier + expModifier + timeModifier;
-    
-    console.log(r);
-}
-
-let args = {
-    offer: 800,
-    expect: 600,
-    days: 14,
-    lazy: 100,
-    exp: 70,
+    return probability > 100 ? 100 : probability;
 }

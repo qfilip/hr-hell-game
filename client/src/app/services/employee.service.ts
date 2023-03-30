@@ -27,8 +27,8 @@ export class EmployeeService {
     salaryPayout = this.salaryPayout$.asObservable();
     dailyWork = this.dailyWork$.asObservable();
 
-    addEmployee(e: IEmployee) {
-        const es = [...this.employees$.getValue(), e];
+    addEmployee(e: IEmployee | IEmployee[]) {
+        const es = [...this.employees$.getValue().concat(e)];
         this.employees$.next(es);
     }
 

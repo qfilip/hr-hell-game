@@ -43,6 +43,9 @@ export class CandidatesComponent implements OnInit {
             daysUntilResponse: utils.makeRandomNumber(0, 10),
             chanceToAccept: candidateUtils.computeOfferAcceptanceChance(offeredSalary, candidate)
         }
+
+        this.candidateService.removeCandidate(candidate);
+        this.candidateService.addOffers(offer);
     }
 
     closeOfferDialog() {
