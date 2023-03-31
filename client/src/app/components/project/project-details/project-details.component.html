@@ -1,0 +1,19 @@
+<section *ngIf="(project$ | async) as project">
+    <h3>Project {{ project.name }}</h3>
+
+    <div>
+        <h4>Details</h4>
+        <ul>
+            <li>
+                <span>Work done</span>
+                <meter [value]="project.completedWork" min="0" [max]="project.totalWork"></meter>
+            </li>
+        </ul>
+        <h4>Employees</h4>
+        <ul>
+            <li *ngFor="let employee of project.assignedEmployees">
+                {{ employee.name }}
+            </li>
+        </ul>
+    </div>
+</section>

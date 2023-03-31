@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IProject } from 'src/app/models/IProject';
 import { ProjectService } from 'src/app/services/project.service';
@@ -10,7 +11,9 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectsOverviewComponent implements OnInit {
 
-    constructor(private projectService: ProjectService) { }
+    constructor(
+        private router: Router,
+        private projectService: ProjectService) { }
 
     ngOnInit(): void {
         this.projects$ = this.projectService.projects;
@@ -23,6 +26,13 @@ export class ProjectsOverviewComponent implements OnInit {
     acceptProposal(p: IProject) {
         this.projectService.removeProposal(p);
         this.projectService.addProjects(p);
+    }
+
+    viewProjectDetails(projectId: string) {
+        const queryParams = {
+            projectId: projectId
+        };
+        this.router.navigate([`/project-details`], { queryParams } )
     }
 
     manageEmployees(p) {

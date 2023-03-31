@@ -10,6 +10,7 @@ import { ProjectsOverviewComponent } from './components/project/projects-overvie
 import { DialogComponent } from './components/dialog/dialog.component';
 import { CandidatesComponent } from './components/employee/candidates/candidates.component';
 import { OffersComponent } from './components/employee/offers/offers.component';
+import { ProjectDetailsComponent } from './components/project/project-details/project-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OffersComponent } from './components/employee/offers/offers.component';
     ProjectsOverviewComponent,
     DialogComponent,
     CandidatesComponent,
-    OffersComponent
+    OffersComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,

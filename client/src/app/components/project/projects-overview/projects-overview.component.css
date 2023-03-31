@@ -5,21 +5,31 @@
     justify-content: space-between;
 }
 
+.container > section {
+    display: block;
+    width: 40%;
+}
+
+.app-grid-item {
+    margin-top: 1rem;
+}
+
 h3 {
     text-align: center;
 }
 
-section > div {
-    margin: 1rem 0rem;
-    border: .2rem ridge var(--clr-darkBlue);
-    padding: 1rem;
-    background-color: lightblue;
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-    transition: .3s;
+table {
+    width: 100%;
 }
 
 button {
     width: fit-content;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }

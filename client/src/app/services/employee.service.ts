@@ -33,6 +33,8 @@ export class EmployeeService {
 
     removeEmployee = (e: IEmployee) => rxUtils.remove(e, this.employees$, (i, v) => i.id !== v.id);
     
+
+    // salary
     private salaryPayout$ = new Subject<number>();
     salaryPayout = this.salaryPayout$.asObservable();
     private computePayouts() {
@@ -40,10 +42,9 @@ export class EmployeeService {
         this.salaryPayout$.next(payout);
     }
     
+    // daily work
     private dailyWork$ = new Subject<Map<string, number>>();
     dailyWork = this.dailyWork$.asObservable();
-
-
 
     private computeDailyWork() {
         const dailyWork = empUtils.computeDailyWork(this.employees$.getValue());

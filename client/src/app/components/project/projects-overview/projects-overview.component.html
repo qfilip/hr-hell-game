@@ -2,22 +2,35 @@
 <div class="container">
     <section>
         <h3>Active projects</h3>
-        <div *ngFor="let p of projects$ | async">
-            <div>
-                {{ p.name }}
+            <div *ngFor="let p of projects$ | async" class="app-grid-item">
+                <div>
+                    {{ p.name }}
+                </div>
+                <div>
+                    <button (click)="viewProjectDetails(p.id)">Manage</button>
+                </div>
             </div>
-            <div>
-                <button (click)="manageEmployees(p)">Accept proposal</button>
-            </div>
-        </div>
     </section>
 
     <section>
         <h3>Proposal projects</h3>
-        <div *ngFor="let p of proposals$ | async">
-            <div>
-                {{ p.name }}
-            </div>
+        <div *ngFor="let p of proposals$ | async" class="app-grid-item">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Name</th>
+                        <th class="text-right">Work scope</th>
+                        <th class="text-right">Payout</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">{{ p.name }}</td>
+                        <td class="text-right">{{ p.totalWork }}</td>
+                        <td class="text-right">{{ p.successPayout }}$</td>
+                    </tr>
+                </tbody>
+            </table>
             <div>
                 <button (click)="acceptProposal(p)">Accept proposal</button>
             </div>

@@ -47,3 +47,34 @@ button.blue:hover {
     background-color: var(--clr-darkBlue);
     color: var(--clr-white);
 }
+
+.app-grid {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, 14rem);
+    gap: .5rem;
+    grid-row-gap: 1rem;
+    grid-auto-rows: 1fr;
+    width: 90%;
+    margin: auto;
+}
+
+.app-grid-item {
+    border: .2rem ridge var(--clr-darkBlue);
+    padding: 1rem;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    transition: .3s;
+}
+
+.app-grid-item:hover {
+    box-shadow: .2rem .2rem .3rem var(--clr-darkBlue);
+    /* transform: scale(1.05); */
+}
+
+.app-grid-item > img {
+    width: 50%;
+    background-color: white;
+}

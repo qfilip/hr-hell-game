@@ -1,5 +1,5 @@
-<div class="candidate-grid">
-    <div *ngFor="let c of candidates$ | async" class="candidate-card">
+<div class="app-grid">
+    <div *ngFor="let c of candidates$ | async" class="app-grid-item">
         <img [src]="c.employee.picture" />
         <div>
             {{ c.employee.name }}
