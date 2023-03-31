@@ -1,0 +1,36 @@
+<div class="flex" *ngIf="employee$ | async as employee">
+    <img [src]="employee.picture" />
+    <hr />
+    <div>
+        <div class="header">Name</div>
+        <div class="text-center">{{ employee.name }}</div>
+    </div>
+    <div>
+        <div class="header">Expertize</div>
+        <div class="text-center">{{ employee.expertize }}</div>
+    </div>
+    <div>
+        <div class="header">Laziness</div>
+        <div class="text-center">{{ employee.laziness }}</div>
+    </div>
+    <div>
+        <div class="header">Satisfaction</div>
+        <div class="text-center">{{ employee.satisfaction }}</div>
+    </div>
+    <div>
+        <div class="header">Salary</div>
+        <input type="number" [value]="employee.salary" />
+    </div>
+    <div>
+        <div class="header">Project</div>
+        <select>
+            <option
+                *ngFor="let p of projects$ | async"
+                [value]="p.id"
+                [selected]="p.id === employee.projectId">
+                {{ p.name }}
+            </option>
+        </select>
+    </div>
+    <button>Change</button>
+</div>

@@ -1,0 +1,24 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+span {
+    position: relative;
+    width: 50%;
+}
+
+.progress-bar {
+    position: absolute;
+    left: 0;
+    background-color: var(--clr-opaqueBlue);
+}
+
+.t-left {
+    text-align: left;
+}
+
+.t-center {
+    text-align: center;
+}

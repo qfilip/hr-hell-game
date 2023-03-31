@@ -27,7 +27,7 @@ button {
     color: var(--clr-black);
 
     border-radius: .2rem;
-    width: 4rem;
+    width: fit-content;
     font-size: 1rem;
     cursor: pointer;
     transition: .3s;

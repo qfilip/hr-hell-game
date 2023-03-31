@@ -21,52 +21,27 @@
 
 <section>
     <div class="employee-list">
-        <h3>List</h3>
-        <div class="app-grid">
-            <div *ngFor="let employee of employees$ | async" class="app-grid-item">
-                <img [src]="employee.picture" />
+        <div class="app-grid content-wrapper">
+            <div *ngFor="let e of employees$ | async" class="app-grid-item" (click)="viewEmployeeDetails(e)">
+                <img [src]="e.picture" />
                 <div>
-                    {{ employee.name }}
+                    {{ e.name }}
                 </div>
+                <percent-bar name="Expertize" [val]="e.expertize"></percent-bar>
+                <percent-bar name="Laziness" [val]="e.laziness"></percent-bar>
+                <percent-bar name="Satisfaction" [val]="e.satisfaction"></percent-bar>
                 <div class="employee-detail">
                     <div class="flex">
-                        <span>Expertize</span>
-                        <span>
-                            <span class="progress-bar" [ngStyle]="{'width': employee.expertize + '%'}">&nbsp;</span>
-                            {{ employee.expertize }} / 100
-                        </span>
+                        <div>Salary</div>
+                        <div class="text-center">
+                            {{ e.salary }}$
+                        </div>
                     </div>
                 </div>
-                <div class="employee-detail">
-                    <div class="flex">
-                        <span>Laziness</span>
-                        <span>
-                            <span class="progress-bar" [ngStyle]="{'width': employee.laziness + '%'}">&nbsp;</span>
-                            {{ employee.laziness }} / 100
-                        </span>
-                    </div>
-                </div>
-                <div class="employee-detail">
-                    <div class="flex">
-                        <span>Satisfaction</span>
-                        <span>
-                            <span class="progress-bar" [ngStyle]="{'width': employee.satisfaction + '%'}">&nbsp;</span>
-                            {{ employee.satisfaction }} / 100
-                        </span>
-                    </div>
-                </div>
-                <div class="employee-detail">
-                    <div class="flex">
-                        <span>Salary</span>
-                        <span>
-                            {{ employee.salary }}$
-                        </span>
-                    </div>
+                <div>
+                    <button (click)="viewEmployeeDetails(e)" class="blue">Details</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="employee-details">
-        <h3>Edit</h3>
     </div>
 </section>

@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjectsOverviewComponent } from './components/project/projects-overview/projects-overview.component';
 import { ProjectDetailsComponent } from './components/project/project-details/project-details.component';
 import { EmployeesListComponent } from './components/employee/employees-list/employees-list.component';
+import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
 
 const routes: Routes = [
     { component: HomeComponent, path: '' },
@@ -12,6 +13,7 @@ const routes: Routes = [
     { component: ProjectsOverviewComponent, path: 'projects-overview' },
     { component: ProjectDetailsComponent, path: 'project-details' },
     { component: EmployeesListComponent, path: 'employees-list' },
+    { component: EmployeeDetailsComponent, path: 'employee-details' },
 ];
 
 @NgModule({

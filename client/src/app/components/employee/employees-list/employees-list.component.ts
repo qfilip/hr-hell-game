@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subject, combineLatest, map } from 'rxjs';
 import { IEmployee } from 'src/app/models/IEmployee';
 import { IProject } from 'src/app/models/IProject';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -10,9 +11,10 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './employees-list.component.html',
   styleUrls: ['./employees-list.component.css']
 })
-export class EmployeesListComponent implements OnInit, OnDestroy {
+export class EmployeesListComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private employeeService: EmployeeService,
     private projectService: ProjectService
   ) { }
@@ -34,11 +36,6 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
       })
     );
   }
-  
-  ngOnDestroy(): void {
-    this.projectQuery$.complete();
-    this.nameQuery$.complete();
-  }
 
   defaultProjectQuery = { name: 'All', value: 'all' };
   projectQuery$ = new BehaviorSubject<string>(this.defaultProjectQuery.value);
@@ -53,5 +50,12 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   onProjectFilter(projectId: string) {
     this.projectQuery$.next(projectId);
+  }
+
+  viewEmployeeDetails(e: IEmployee) {
+    const queryParams = {
+        employeeId: e.id
+    };
+    this.router.navigate([`/employee-details`], { queryParams } )
   }
 }

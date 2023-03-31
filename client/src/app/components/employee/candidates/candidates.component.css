@@ -1,21 +1,5 @@
-.candidate-detail {
+percent-bar {
     width: 100%;
-}
-
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.flex > span {
-    position: relative;
-    width: 50%;
-}
-
-.progress-bar {
-    position: absolute;
-    background-color: var(--clr-opaqueBlue);
 }
 
 button {

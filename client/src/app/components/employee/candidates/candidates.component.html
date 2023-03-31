@@ -4,24 +4,9 @@
         <div>
             {{ c.employee.name }}
         </div>
-        <div class="candidate-detail">
-            <div class="flex">
-                <span>Expertize</span>
-                <span>
-                    <span class="progress-bar" [ngStyle]="{'width': c.employee.expertize + '%'}">&nbsp;</span>
-                    {{ c.employee.expertize }} / 100
-                </span>
-            </div>
-        </div>
-        <div class="candidate-detail">
-            <div class="flex">
-                <span>Laziness</span>
-                <span>
-                    <span class="progress-bar" [ngStyle]="{'width': c.employee.laziness + '%'}">&nbsp;</span>
-                    {{ c.employee.laziness }} / 100
-                </span>
-            </div>
-        </div>
+        <percent-bar name="Expertize" [val]="c.employee.expertize"></percent-bar>
+        <percent-bar name="Laziness" [val]="c.employee.laziness"></percent-bar>
+       
         <div class="candidate-detail flex">
             <span>Salary Expectation</span>
             <span>{{ c.salaryExpectation }}</span>
