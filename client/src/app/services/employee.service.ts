@@ -3,6 +3,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { IEmployee } from '../models/IEmployee';
 import * as rxUtils from '../functions/rx.utils';
 import * as empUtils from '../functions/employee-service.utils';
+import * as mocks from '../functions/mock.utils';
 
 import { TimeService } from './time.service';
 
@@ -20,7 +21,7 @@ export class EmployeeService {
         });
     }
 
-    private employees$ = new BehaviorSubject<IEmployee[]>([]);
+    private employees$ = new BehaviorSubject<IEmployee[]>(mocks.mockCompany().projects.map(x => x.assignedEmployees).flat());
     employees = this.employees$.asObservable();
     addEmployees = (e: IEmployee | IEmployee[]) => rxUtils.add(e, this.employees$);
     editEmployee = (e: IEmployee) => {

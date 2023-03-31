@@ -5,6 +5,7 @@ import { IProject } from '../models/IProject';
 import { EmployeeService } from './employee.service';
 import * as projUtils from '../functions/project-service.utils';
 import * as rxUtils from '../functions/rx.utils';
+import * as mocks from '../functions/mock.utils';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class ProjectService {
         })
     }
 
-    private projects$ = new BehaviorSubject<IProject[]>([projUtils.generateOnboardingProject()]);
+    private projects$ = new BehaviorSubject<IProject[]>(mocks.mockCompany().projects);
     private proposals$ = new BehaviorSubject<IProject[]>(projUtils.generateProposals(10));
     
     projects = this.projects$.asObservable();

@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ICompany } from '../models/ICompany';
 import { EmployeeService } from './employee.service';
 import { ProjectService } from './project.service';
+import * as mocks from '../functions/mock.utils';
 
 @Injectable({
     providedIn: 'root'
@@ -36,10 +37,7 @@ export class CompanyService {
         })
     }
 
-    private company$ = new BehaviorSubject<ICompany>({
-        budget: 100000,
-        projects: []
-    } as ICompany);
+    private company$ = new BehaviorSubject<ICompany>(mocks.mockCompany());
 
     company = this.company$.asObservable();
 }

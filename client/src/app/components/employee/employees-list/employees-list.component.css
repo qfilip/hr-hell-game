@@ -1,0 +1,79 @@
+section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar > span {
+    margin: 1rem;
+}
+
+.employee-list {
+    width: 70%;
+}
+
+.app-grid {
+    margin: 2rem;
+}
+
+.app-grid-item {
+    cursor: pointer;
+}
+
+.employee-details {
+    width: 30%;
+}
+
+.employee-detail {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex > span {
+    position: relative;
+    width: 50%;
+}
+
+.progress-bar {
+    position: absolute;
+    background-color: var(--clr-opaqueBlue);
+}
+
+button {
+    width: fit-content;
+}
+
+.offer-dialog-body {
+    width: 20rem;
+    margin-top: 1rem;
+}
+
+.offer-dialog-body > * {
+    margin-top: .5rem;
+}
+
+.offer-dialog-body > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.offer-input {
+    width: 4rem;
+}
+
+.offer-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}

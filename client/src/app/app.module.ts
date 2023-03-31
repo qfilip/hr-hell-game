@@ -11,6 +11,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { CandidatesComponent } from './components/employee/candidates/candidates.component';
 import { OffersComponent } from './components/employee/offers/offers.component';
 import { ProjectDetailsComponent } from './components/project/project-details/project-details.component';
+import { EmployeesListComponent } from './components/employee/employees-list/employees-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProjectDetailsComponent } from './components/project/project-details/pr
     DialogComponent,
     CandidatesComponent,
     OffersComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    EmployeesListComponent
   ],
   imports: [
     BrowserModule,

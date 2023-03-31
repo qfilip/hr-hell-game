@@ -1,0 +1,72 @@
+<h2>
+    Employees
+</h2>
+
+<div class="search-bar">
+    <span>
+        Name: <input #nameFilter type="text" (input)="onNameFilter(nameFilter.value)" />
+    </span>
+    <span>
+        Project:
+        <select #projectFilter (change)="onProjectFilter(projectFilter.value)">
+            <option [value]="defaultProjectQuery.value" selected>
+                {{ defaultProjectQuery.name }}
+            </option>
+            <option *ngFor="let p of projects$ | async" [value]="p.id">
+                {{ p.name }}
+            </option>
+        </select>
+    </span>
+</div>
+
+<section>
+    <div class="employee-list">
+        <h3>List</h3>
+        <div class="app-grid">
+            <div *ngFor="let employee of employees$ | async" class="app-grid-item">
+                <img [src]="employee.picture" />
+                <div>
+                    {{ employee.name }}
+                </div>
+                <div class="employee-detail">
+                    <div class="flex">
+                        <span>Expertize</span>
+                        <span>
+                            <span class="progress-bar" [ngStyle]="{'width': employee.expertize + '%'}">&nbsp;</span>
+                            {{ employee.expertize }} / 100
+                        </span>
+                    </div>
+                </div>
+                <div class="employee-detail">
+                    <div class="flex">
+                        <span>Laziness</span>
+                        <span>
+                            <span class="progress-bar" [ngStyle]="{'width': employee.laziness + '%'}">&nbsp;</span>
+                            {{ employee.laziness }} / 100
+                        </span>
+                    </div>
+                </div>
+                <div class="employee-detail">
+                    <div class="flex">
+                        <span>Satisfaction</span>
+                        <span>
+                            <span class="progress-bar" [ngStyle]="{'width': employee.satisfaction + '%'}">&nbsp;</span>
+                            {{ employee.satisfaction }} / 100
+                        </span>
+                    </div>
+                </div>
+                <div class="employee-detail">
+                    <div class="flex">
+                        <span>Salary</span>
+                        <span>
+                            {{ employee.salary }}$
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="employee-details">
+        <h3>Edit</h3>
+    </div>
+</section>
