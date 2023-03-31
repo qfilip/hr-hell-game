@@ -6,15 +6,19 @@ import { EmployeeService } from './employee.service';
 import * as projUtils from '../functions/project-service.utils';
 import * as rxUtils from '../functions/rx.utils';
 import * as mocks from '../functions/mock.utils';
+import { IWork } from '../models/IWork';
+import { WorkService } from './work.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectService {
 
-    constructor(private employeeService: EmployeeService)
+    constructor(
+        private workService: WorkService,
+        private employeeService: EmployeeService)
     {
-        this.employeeService.dailyWork
+        this.workService.dailyWork
         .subscribe({
             next: (x) => this.updateProjectsWork(x)
         });
@@ -37,7 +41,7 @@ export class ProjectService {
     removeProposal = (p: IProject) => rxUtils.remove(p, this.proposals$, (i, v) => i.id !== v.id);
 
 
-    private updateProjectsWork(x: Map<string, number>) {
+    private updateProjectsWork(x: IWork[]) {
         const projects = projUtils.updateProjectsWork(x, this.projects$.getValue());
         this.projects$.next(projects);
     }

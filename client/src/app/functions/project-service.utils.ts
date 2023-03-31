@@ -2,10 +2,15 @@ import { IEmployee } from "../models/IEmployee";
 import { IProject } from "../models/IProject";
 import { faker } from '@faker-js/faker';
 import * as utils from './utils';
+import { IWork } from "../models/IWork";
 
-export function updateProjectsWork(workMap: Map<string, number>, ps: IProject[]) {
+export function updateProjectsWork(workData: IWork[], ps: IProject[]) {
     return ps.map(p => {
-        return {...p, completedWork: p.completedWork + workMap[p.id] }
+        const dailyWork = workData
+            .filter(x => x.projectId === p.id)
+            .reduce((acc, next) => { return acc + next.points }, 0);
+        
+            return {...p, completedWork: p.completedWork + dailyWork }
     });
 }
 

@@ -16,8 +16,10 @@ export function mockCompany() {
 
     // company = {
     //     budget: 100_000.,
-    //     projects: mockProjects()
+    //     projects: mockProjects(),
+    //     work: []
     // }
+    // console.log(JSON.stringify(company));
     
     company = JSON.parse(companyJson) as ICompany;
     company.projects.forEach(p => p.assignedEmployees.forEach(e => e.picture = utils.getAvatar(e.name, sanitizer)));
@@ -62,7 +64,7 @@ function mockEmployees(projectId: string) {
         const name = faker.name.fullName();
         const expertize = utils.makeRandomNumber(1, 100);
 
-        const e: IEmployee = {
+        const emp: IEmployee = {
             id: faker.git.shortSha(),
             projectId: projectId,
             name: faker.name.fullName(),
@@ -70,13 +72,14 @@ function mockEmployees(projectId: string) {
             laziness: utils.makeRandomNumber(1, 100),
             salary: expertize * 10 + utils.makeRandomNumber(-200, 200),
             satisfaction: utils.makeRandomNumber(1, 100),
+            work: [],
             picture: ''
         }
 
-        emps.push(e);
+        emps.push(emp);
     }
 
     return emps;
 }
 
-const companyJson = `{"budget":100000,"projects":[{"id":"1e2b6ff","name":"Onboarding","assignedEmployees":[{"id":"abd59c1","projectId":"1e2b6ff","name":"Miss Reginald McKenzie","expertize":4,"laziness":64,"salary":62,"satisfaction":87,"picture":""},{"id":"dacdba3","projectId":"1e2b6ff","name":"Clara Gerlach","expertize":41,"laziness":45,"salary":314,"satisfaction":21,"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"f88a7a4","name":"Sleek Bronze Tuna","assignedEmployees":[{"id":"bbb1adc","projectId":"f88a7a4","name":"Laurence Gibson","expertize":89,"laziness":61,"salary":824,"satisfaction":73,"picture":""},{"id":"e60c1cc","projectId":"f88a7a4","name":"May Gleason","expertize":89,"laziness":22,"salary":838,"satisfaction":20,"picture":""}],"completedWork":0,"totalWork":671,"successPayout":56438},{"id":"fa6d42c","name":"Handmade Metal Cheese","assignedEmployees":[{"id":"3f0f3c9","projectId":"fa6d42c","name":"Herman Dickens","expertize":82,"laziness":83,"salary":823,"satisfaction":26,"picture":""},{"id":"47abeee","projectId":"fa6d42c","name":"Marc Schneider","expertize":88,"laziness":79,"salary":965,"satisfaction":29,"picture":""}],"completedWork":0,"totalWork":1333,"successPayout":59642}]}`;
+const companyJson = `{"budget":100000,"projects":[{"id":"510d3bc","name":"Onboarding","assignedEmployees":[{"id":"fea5ea3","projectId":"510d3bc","name":"Domingo Stoltenberg PhD","expertize":40,"laziness":57,"salary":545,"satisfaction":26,"work":[],"picture":""},{"id":"edf3b4b","projectId":"510d3bc","name":"Noah Reichel","expertize":80,"laziness":17,"salary":743,"satisfaction":54,"work":[],"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"42b71ba","name":"Licensed Soft Cheese","assignedEmployees":[{"id":"efca7ee","projectId":"42b71ba","name":"Anthony Fritsch","expertize":34,"laziness":23,"salary":398,"satisfaction":55,"work":[],"picture":""},{"id":"35bb14e","projectId":"42b71ba","name":"Gustavo Schulist","expertize":10,"laziness":53,"salary":156,"satisfaction":28,"work":[],"picture":""}],"completedWork":0,"totalWork":966,"successPayout":54634},{"id":"0ca2698","name":"Unbranded Concrete Fish","assignedEmployees":[{"id":"dcbbbc8","projectId":"0ca2698","name":"Gabriel Lubowitz","expertize":48,"laziness":44,"salary":539,"satisfaction":81,"work":[],"picture":""},{"id":"edbd933","projectId":"0ca2698","name":"Dorothy Frami","expertize":75,"laziness":69,"salary":754,"satisfaction":5,"work":[],"picture":""}],"completedWork":0,"totalWork":1827,"successPayout":69047}],"work":[]}`;

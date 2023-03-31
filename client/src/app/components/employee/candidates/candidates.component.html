@@ -4,21 +4,26 @@
         <div>
             {{ c.employee.name }}
         </div>
+        <hr />
         <percent-bar name="Expertize" [val]="c.employee.expertize"></percent-bar>
         <percent-bar name="Laziness" [val]="c.employee.laziness"></percent-bar>
        
         <div class="candidate-detail flex">
-            <span>Salary Expectation</span>
-            <span>{{ c.salaryExpectation }}</span>
+            <div>Salary Expectation</div>
+            <div class="text-center">{{ c.salaryExpectation }}$</div>
         </div>
-        <div>
-            Days without job: {{ c.daysWithoutJob }}
+        <div class="candidate-detail flex">
+            <div>Unemployed</div>
+            <div class="text-center">{{ c.daysWithoutJob }}</div>
         </div>
+        <hr />
         <div>
             <button (click)="openOfferDialog(c)" class="blue">Send offer</button>
         </div>
     </div>
 </div>
+
+
 
 <app-dialog #appDialog>
     <h4 header>Send offer</h4>

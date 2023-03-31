@@ -1,4 +1,5 @@
 import { SafeResourceUrl } from "@angular/platform-browser";
+import { IWork } from "./IWork";
 
 export interface IEmployee {
     id: string;
@@ -8,6 +9,6 @@ export interface IEmployee {
     laziness: number;
     expertize: number;
     satisfaction: number;
-    
+    work: IWork[];
     picture: SafeResourceUrl;
 }

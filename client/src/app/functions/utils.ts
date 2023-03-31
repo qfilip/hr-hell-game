@@ -23,6 +23,7 @@ export function createRandomEmployee() {
         laziness: makeRandomNumber(1, 100),
         expertize: makeRandomNumber(1, 100),
         satisfaction: 0,
+        work: [],
         picture: null
     }
 

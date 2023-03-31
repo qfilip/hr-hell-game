@@ -50,6 +50,7 @@ export class TimeService {
     dayLength = this.dayLength$.asObservable();
 
     date = this.date$.asObservable();
+    currentDate = this.date$.getValue();
 
     private addDay() {
         const newDate = new Date(this.date$.getValue());
@@ -59,5 +60,9 @@ export class TimeService {
 
     onDayPassed(handler: () => void) {
         this.onDayPassedHandlers.push(handler);
+    }
+
+    onMonthPassed(handler: () => void) {
+        this.onMonthPassedHandlers.push(handler);
     }
 }

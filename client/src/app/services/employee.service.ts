@@ -6,18 +6,24 @@ import * as empUtils from '../functions/employee-service.utils';
 import * as mocks from '../functions/mock.utils';
 
 import { TimeService } from './time.service';
+import { IWork } from '../models/IWork';
+import { WorkService } from './work.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EmployeeService {
     constructor(
-        private timeService: TimeService
+        private timeService: TimeService,
+        private workService: WorkService
     )
     {
         this.timeService.onDayPassed(() => {
-            this.computePayouts();
             this.computeDailyWork();
+        });
+
+        this.timeService.onMonthPassed(() => {
+            this.computePayouts();
         });
     }
 
@@ -42,13 +48,9 @@ export class EmployeeService {
         const payout = empUtils.computePayouts(this.employees$.getValue());
         this.salaryPayout$.next(payout);
     }
-    
-    // daily work
-    private dailyWork$ = new Subject<Map<string, number>>();
-    dailyWork = this.dailyWork$.asObservable();
 
     private computeDailyWork() {
-        const dailyWork = empUtils.computeDailyWork(this.employees$.getValue());
-        this.dailyWork$.next(dailyWork);
+        const dailyWork = empUtils.computeDailyWork(this.employees$.getValue(), this.timeService.currentDate);
+        this.workService.addDailyWork(dailyWork);
     }
 }

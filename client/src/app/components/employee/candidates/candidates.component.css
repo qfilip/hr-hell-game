@@ -6,6 +6,25 @@ button {
     width: fit-content;
 }
 
+.candidate-detail {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex > div {
+    width: 50%;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
 .offer-dialog-body {
     width: 20rem;
     margin-top: 1rem;
