@@ -5,8 +5,8 @@
         <h4>Details</h4>
         <ul>
             <li>
-                <span>Work done</span>
-                <meter [value]="project.completedWork" min="0" [max]="project.totalWork"></meter>
+                <span>Work done: {{ project.completedWork }} / {{ project.totalWork }}</span>
+                
             </li>
         </ul>
         <h4>Employees</h4>

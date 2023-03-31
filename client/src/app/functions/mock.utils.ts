@@ -19,8 +19,9 @@ export function mockCompany() {
     //     projects: mockProjects(),
     //     work: []
     // }
-    // console.log(JSON.stringify(company));
-    
+    // companyJson = JSON.stringify(company);
+    // console.log(companyJson);
+
     company = JSON.parse(companyJson) as ICompany;
     company.projects.forEach(p => p.assignedEmployees.forEach(e => e.picture = utils.getAvatar(e.name, sanitizer)));
     
@@ -41,7 +42,7 @@ function mockProjects() {
     }
 
     ps.push(onboarding);
-
+    
     for(let i = 0; i < 2; i++) {
         const id = faker.git.shortSha();
         const p: IProject = {
@@ -49,7 +50,7 @@ function mockProjects() {
             name: faker.commerce.productName(),
             assignedEmployees: mockEmployees(id),
             completedWork: 0,
-            totalWork: utils.makeRandomNumber(500, 2000),
+            totalWork: utils.makeRandomNumber(30_000, 200_000),
             successPayout: utils.makeRandomNumber(50000, 70000)
         };
         ps.push(p);
@@ -67,7 +68,7 @@ function mockEmployees(projectId: string) {
         const emp: IEmployee = {
             id: faker.git.shortSha(),
             projectId: projectId,
-            name: faker.name.fullName(),
+            name: name,
             expertize: expertize,
             laziness: utils.makeRandomNumber(1, 100),
             salary: expertize * 10 + utils.makeRandomNumber(-200, 200),
@@ -82,4 +83,4 @@ function mockEmployees(projectId: string) {
     return emps;
 }
 
-const companyJson = `{"budget":100000,"projects":[{"id":"510d3bc","name":"Onboarding","assignedEmployees":[{"id":"fea5ea3","projectId":"510d3bc","name":"Domingo Stoltenberg PhD","expertize":40,"laziness":57,"salary":545,"satisfaction":26,"work":[],"picture":""},{"id":"edf3b4b","projectId":"510d3bc","name":"Noah Reichel","expertize":80,"laziness":17,"salary":743,"satisfaction":54,"work":[],"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"42b71ba","name":"Licensed Soft Cheese","assignedEmployees":[{"id":"efca7ee","projectId":"42b71ba","name":"Anthony Fritsch","expertize":34,"laziness":23,"salary":398,"satisfaction":55,"work":[],"picture":""},{"id":"35bb14e","projectId":"42b71ba","name":"Gustavo Schulist","expertize":10,"laziness":53,"salary":156,"satisfaction":28,"work":[],"picture":""}],"completedWork":0,"totalWork":966,"successPayout":54634},{"id":"0ca2698","name":"Unbranded Concrete Fish","assignedEmployees":[{"id":"dcbbbc8","projectId":"0ca2698","name":"Gabriel Lubowitz","expertize":48,"laziness":44,"salary":539,"satisfaction":81,"work":[],"picture":""},{"id":"edbd933","projectId":"0ca2698","name":"Dorothy Frami","expertize":75,"laziness":69,"salary":754,"satisfaction":5,"work":[],"picture":""}],"completedWork":0,"totalWork":1827,"successPayout":69047}],"work":[]}`;
+let companyJson = `{"budget":100000,"projects":[{"id":"8017fed","name":"Onboarding","assignedEmployees":[{"id":"43849c8","projectId":"8017fed","name":"Otis Schinner","expertize":53,"laziness":5,"salary":605,"satisfaction":34,"work":[],"picture":""},{"id":"fffa7fb","projectId":"8017fed","name":"Mrs. Derrick Blick","expertize":55,"laziness":67,"salary":558,"satisfaction":28,"work":[],"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"2a76fdd","name":"Modern Steel Fish","assignedEmployees":[{"id":"4aaad0d","projectId":"2a76fdd","name":"Maria Mante IV","expertize":13,"laziness":90,"salary":216,"satisfaction":54,"work":[],"picture":""},{"id":"d48cc8a","projectId":"2a76fdd","name":"Elaine Haley","expertize":4,"laziness":25,"salary":-126,"satisfaction":39,"work":[],"picture":""}],"completedWork":0,"totalWork":86093,"successPayout":61548},{"id":"bef908c","name":"Sleek Bronze Chips","assignedEmployees":[{"id":"3db59cb","projectId":"bef908c","name":"Amos Volkman","expertize":62,"laziness":58,"salary":527,"satisfaction":22,"work":[],"picture":""},{"id":"7ecb0f4","projectId":"bef908c","name":"Ismael Ziemann","expertize":26,"laziness":43,"salary":293,"satisfaction":39,"work":[],"picture":""}],"completedWork":0,"totalWork":71491,"successPayout":57940}],"work":[]}`;

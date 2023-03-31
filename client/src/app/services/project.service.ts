@@ -42,8 +42,9 @@ export class ProjectService {
 
 
     private updateProjectsWork(x: IWork[]) {
-        const projects = projUtils.updateProjectsWork(x, this.projects$.getValue());
-        this.projects$.next(projects);
+        const dailyWorkResults = projUtils.updateProjectsWork(x, this.projects$.getValue());
+        this.workService.addWork(dailyWorkResults.map(x => x.dailyWork).flat())
+        this.projects$.next(dailyWorkResults.map(x => x.project));
     }
 
     private updateProjectsEmployees(es: IEmployee[]) {

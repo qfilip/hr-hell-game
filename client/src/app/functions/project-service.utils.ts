@@ -3,15 +3,33 @@ import { IProject } from "../models/IProject";
 import { faker } from '@faker-js/faker';
 import * as utils from './utils';
 import { IWork } from "../models/IWork";
+import { IProjectDailyWork } from "../models/dtos/IProjectDailyWorkDto";
 
 export function updateProjectsWork(workData: IWork[], ps: IProject[]) {
-    return ps.map(p => {
+    const dailyWorkData: IProjectDailyWork[] = ps.map(p => {
+        let workDone = p.completedWork;
+        
         const dailyWork = workData
             .filter(x => x.projectId === p.id)
-            .reduce((acc, next) => { return acc + next.points }, 0);
+            .map(w => {
+                if(w.points + workDone >= p.totalWork) {
+                    return {...w, points: p.totalWork - workDone };;
+                }
+                return { ...w };
+            });
+
+        const dailyWorkSum = dailyWork.reduce((acc, next) => { return acc + next.points }, 0);
+        const project = {...p, completedWork: p.completedWork + dailyWorkSum }
         
-            return {...p, completedWork: p.completedWork + dailyWork }
+        const dailyData: IProjectDailyWork = {
+            project: project,
+            dailyWork: dailyWork
+        }
+        
+        return dailyData;
     });
+
+    return dailyWorkData;
 }
 
 export function updateProjectsEmployees(es: IEmployee[], ps: IProject[]) {

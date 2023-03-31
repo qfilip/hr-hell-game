@@ -12,12 +12,9 @@ export class WorkService {
 
     private work$ = new BehaviorSubject<IWork[]>([]);
     work = this.work$.asObservable();
-    // addWork = (work: IWork | IWork[]) => rxUtils.add(work, this.work$);
+    addWork = (work: IWork | IWork[]) => rxUtils.add(work, this.work$);
 
     private dailyWork$ = new Subject<IWork[]>();
     dailyWork = this.dailyWork$.asObservable();
-    addDailyWork = (work: IWork[]) => {
-        rxUtils.add(work, this.work$);
-        this.dailyWork$.next(work);
-    }
+    addDailyWork = (work: IWork[]) => this.dailyWork$.next(work);
 }
