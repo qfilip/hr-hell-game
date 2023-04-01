@@ -1,9 +1,6 @@
 <header [ngClass]="timeRunning ? 'blue' : 'grey'">
     <h1>Company Manager</h1>
     <span>
-        <a [routerLink]="['']">home</a>
-    </span>
-    <span>
         budget: {{ (company$ | async).budget }}$
     </span>
     <span>

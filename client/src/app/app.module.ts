@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HireComponent } from './components/employee/hire/hire.component';
 import { TimeControlComponent } from './components/time-control/time-control.component';
-import { HomeComponent } from './components/home/home.component';
 import { ProjectsOverviewComponent } from './components/project/projects-overview/projects-overview.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { CandidatesComponent } from './components/employee/candidates/candidates.component';
@@ -14,13 +13,13 @@ import { ProjectDetailsComponent } from './components/project/project-details/pr
 import { EmployeesListComponent } from './components/employee/employees-list/employees-list.component';
 import { PercentBarComponent } from './components/percent-bar/percent-bar.component';
 import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HireComponent,
     TimeControlComponent,
-    HomeComponent,
     ProjectsOverviewComponent,
     DialogComponent,
     CandidatesComponent,
@@ -28,7 +27,8 @@ import { EmployeeDetailsComponent } from './components/employee/employee-details
     ProjectDetailsComponent,
     EmployeesListComponent,
     PercentBarComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

@@ -17,18 +17,14 @@ section {
 }
 
 .fieldset-flex {
-    margin: 1rem 1rem;
+    margin: 1rem 0rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.fieldset-flex > * {
+.fieldset-flex > input, select {
     width: 50%;
-}
-
-div {
-    margin: auto;
 }
 
 .header {

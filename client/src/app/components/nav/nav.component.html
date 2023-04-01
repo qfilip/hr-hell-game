@@ -1,0 +1,8 @@
+<nav>
+    <a 
+        *ngFor="let r of routes"
+        (click)="navigateTo(r.route)"
+        [ngClass]="{'selected': r.route === currentRoute.route }">
+        {{ r.text }}
+    </a>
+</nav>

@@ -64,6 +64,7 @@ function mockEmployees(projectId: string) {
     for(let i = 0; i < 2; i++) {
         const name = faker.name.fullName();
         const expertize = utils.makeRandomNumber(1, 100);
+        const salaryBase = expertize * 10;
 
         const emp: IEmployee = {
             id: faker.git.shortSha(),
@@ -71,7 +72,7 @@ function mockEmployees(projectId: string) {
             name: name,
             expertize: expertize,
             laziness: utils.makeRandomNumber(1, 100),
-            salary: expertize * 10 + utils.makeRandomNumber(-200, 200),
+            salary: salaryBase + addOrSubstractRandomPercent(salaryBase),
             satisfaction: utils.makeRandomNumber(1, 100),
             work: [],
             picture: ''
@@ -83,4 +84,9 @@ function mockEmployees(projectId: string) {
     return emps;
 }
 
-let companyJson = `{"budget":100000,"projects":[{"id":"8017fed","name":"Onboarding","assignedEmployees":[{"id":"43849c8","projectId":"8017fed","name":"Otis Schinner","expertize":53,"laziness":5,"salary":605,"satisfaction":34,"work":[],"picture":""},{"id":"fffa7fb","projectId":"8017fed","name":"Mrs. Derrick Blick","expertize":55,"laziness":67,"salary":558,"satisfaction":28,"work":[],"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"2a76fdd","name":"Modern Steel Fish","assignedEmployees":[{"id":"4aaad0d","projectId":"2a76fdd","name":"Maria Mante IV","expertize":13,"laziness":90,"salary":216,"satisfaction":54,"work":[],"picture":""},{"id":"d48cc8a","projectId":"2a76fdd","name":"Elaine Haley","expertize":4,"laziness":25,"salary":-126,"satisfaction":39,"work":[],"picture":""}],"completedWork":0,"totalWork":86093,"successPayout":61548},{"id":"bef908c","name":"Sleek Bronze Chips","assignedEmployees":[{"id":"3db59cb","projectId":"bef908c","name":"Amos Volkman","expertize":62,"laziness":58,"salary":527,"satisfaction":22,"work":[],"picture":""},{"id":"7ecb0f4","projectId":"bef908c","name":"Ismael Ziemann","expertize":26,"laziness":43,"salary":293,"satisfaction":39,"work":[],"picture":""}],"completedWork":0,"totalWork":71491,"successPayout":57940}],"work":[]}`;
+function addOrSubstractRandomPercent(total: number) {
+    const percentage = utils.makeRandomNumber(-20, 20);
+    return Math.floor(total / 100 * percentage);
+}
+
+let companyJson = `{"budget":100000,"projects":[{"id":"da10da2","name":"Onboarding","assignedEmployees":[{"id":"e1fcd15","projectId":"da10da2","name":"Keith Quigley","expertize":12,"laziness":70,"salary":126,"satisfaction":3,"work":[],"picture":""},{"id":"d75bcf5","projectId":"da10da2","name":"Cecil Hilpert MD","expertize":52,"laziness":42,"salary":613,"satisfaction":79,"work":[],"picture":""}],"completedWork":0,"totalWork":0,"successPayout":0},{"id":"d3af945","name":"Awesome Granite Tuna","assignedEmployees":[{"id":"ed0eefb","projectId":"d3af945","name":"Whitney Dibbert","expertize":91,"laziness":96,"salary":1028,"satisfaction":70,"work":[],"picture":""},{"id":"ee2d3aa","projectId":"d3af945","name":"Ted King DDS","expertize":10,"laziness":15,"salary":108,"satisfaction":26,"work":[],"picture":""}],"completedWork":0,"totalWork":186590,"successPayout":69606},{"id":"0d45ecd","name":"Gorgeous Metal Salad","assignedEmployees":[{"id":"f3dc222","projectId":"0d45ecd","name":"Randy Fadel","expertize":82,"laziness":67,"salary":738,"satisfaction":49,"work":[],"picture":""},{"id":"0acedfc","projectId":"0d45ecd","name":"Kristie Hilpert","expertize":26,"laziness":27,"salary":239,"satisfaction":33,"work":[],"picture":""}],"completedWork":0,"totalWork":154348,"successPayout":61342}],"work":[]}`;

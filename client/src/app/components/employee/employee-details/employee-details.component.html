@@ -1,4 +1,4 @@
-<section *ngIf="employee$ | async as employee">
+<section *ngIf="employee">
     <div class="flex">
         <img [src]="employee.picture" />
         <hr />
@@ -24,9 +24,9 @@
         <legend>Change</legend>
         <div class="fieldset-flex">
             <label>Reallocate: </label>
-            <select>
+            <select #projectChange>
                 <option
-                    *ngFor="let p of projects$ | async"
+                    *ngFor="let p of projects"
                     [value]="p.id"
                     [selected]="p.id === employee.projectId">
                     {{ p.name }}
@@ -35,12 +35,32 @@
         </div>
         <div class="fieldset-flex">
             <label>Salary:</label>
-            <input type="number" [value]="employee.salary" />
+            <input #salary type="number" [value]="employee.salary" />
         </div>
-        <button>Change</button>
+        <button (click)="editEmployee(projectChange.value, salary.value)">Change</button>
     </fieldset>
 
     <fieldset>
         <legend>Stats</legend>
+        <h3>Global</h3>
+        <div class="fieldset-flex">
+            <label>Total work done:</label>
+            <div>{{ totalWork }}</div>
+        </div>
+        <div class="fieldset-flex">
+            <h3>Per project</h3>
+            <select #projectStats (change)="onProjectStatsChange(projectStats.value)">
+                <option
+                    *ngFor="let p of projects"
+                    [value]="p.id"
+                    [selected]="p.id === employee.projectId">
+                    {{ p.name }}
+                </option>
+            </select>
+        </div>
+        <div class="fieldset-flex">
+            <label>Work done:</label>
+            <div>{{ projectWork }}</div>
+        </div>
     </fieldset>
 </section>

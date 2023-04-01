@@ -5,19 +5,24 @@ nav {
     gap: .5rem;
     grid-row-gap: 1rem;
     grid-auto-rows: 1fr;
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
 nav > a {
     border: .2rem ridge var(--clr-darkBlue);
     text-decoration: none;
-    padding: 1rem;
+    padding: 0rem 1rem;
     text-align: center;
     transition: .3s;
 }
 
 nav > a:hover {
+    background-color: var(--clr-darkBlue);
+    color: var(--clr-white);
+}
+
+.selected {
     background-color: var(--clr-darkBlue);
     color: var(--clr-white);
 }
