@@ -49,8 +49,12 @@ export class EmployeeService {
         this.salaryPayout$.next(payout);
     }
 
+    // daily work
     private computeDailyWork() {
         const dailyWork = empUtils.computeDailyWork(this.employees$.getValue(), this.timeService.currentDate);
         this.workService.addDailyWork(dailyWork);
     }
+
+    // exp gain
+    
 }

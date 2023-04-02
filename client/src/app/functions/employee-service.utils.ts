@@ -30,3 +30,16 @@ export function computeDailyWork(es: IEmployee[], date: Date) {
             return acc;
         }, initialValue);
 }
+
+function addExperience(exp: number) {
+    // testing
+    
+    for(let i = 0; i < 31; i++) {
+        let exponent = -0.2 * exp;
+        let newExp = 100 * Math.pow(Math.E, exponent) / 2;
+        console.log(newExp);
+        exp += Math.ceil(newExp);
+    }
+    
+    console.log(exp)
+}
